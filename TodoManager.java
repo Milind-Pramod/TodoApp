@@ -6,8 +6,16 @@ public class TodoManager {
 
     private List<Todo> todos = new ArrayList<>();
 
-    public void addTodo(Todo todo) {
+    public boolean addTodo(Todo todo) {
+
+        if (todo.id <= 0)
+            return false;
+
+        if (todoIdExists(todo.id))
+            return false;
+
         todos.add(todo);
+        return true;
     }
 
     public void showTodos() {
@@ -42,5 +50,13 @@ public class TodoManager {
         }
 
         System.out.println("Todo not found");
+    }
+
+    public boolean todoIdExists(int id) {
+        for (Todo todo : todos) {
+            if (todo.id == id)
+                return true;
+        }
+        return false;
     }
 }
